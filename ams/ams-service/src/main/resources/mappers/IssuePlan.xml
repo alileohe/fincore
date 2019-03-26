@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.IssuePlanDao">
+    <resultMap id="BaseResultMap" type="com.zb.fincore.ams.service.dal.model.IssuePlan" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="credit_business_code" property="creditBusinessCode" jdbcType="VARCHAR" />
+        <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
+        <result column="product_day_count" property="productDayCount" jdbcType="INTEGER" />
+        <result column="contract_day_count" property="contractDayCount" jdbcType="INTEGER" />
+        <result column="value_start_time" property="valueStartTime" jdbcType="TIMESTAMP" />
+        <result column="value_end_time" property="valueEndTime" jdbcType="TIMESTAMP" />
+        <result column="free_start_time" property="freeStartTime" jdbcType="TIMESTAMP" />
+        <result column="free_end_time" property="freeEndTime" jdbcType="TIMESTAMP" />
+        <result column="sale_start_time" property="saleStartTime" jdbcType="TIMESTAMP" />
+        <result column="sale_end_time" property="saleEndTime" jdbcType="TIMESTAMP" />
+        <result column="product_value_start_time" property="productValueStartTime" jdbcType="TIMESTAMP" />
+        <result column="product_value_end_time" property="productValueEndTime" jdbcType="TIMESTAMP" />
+        <result column="single_amount" property="singleAmount" jdbcType="DECIMAL" />
+        <result column="asset_count" property="assetCount" jdbcType="INTEGER" />
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+        <result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+        <result column="memo" property="memo" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+        <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, credit_business_code, batch_no, product_day_count, contract_day_count, value_start_time,
+        value_end_time, free_start_time, free_end_time, sale_start_time, sale_end_time, product_value_start_time,
+        product_value_end_time, single_amount, asset_count, total_amount, subject_code, memo,
+        create_time, create_by, modify_time, modify_by
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from ams_issue_plan
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from ams_issue_plan
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zb.fincore.ams.service.dal.model.IssuePlan" >
+        insert into ams_issue_plan (id, credit_business_code, batch_no,
+        product_day_count, contract_day_count, value_start_time,
+        value_end_time, free_start_time, free_end_time,
+        sale_start_time, sale_end_time, product_value_start_time,
+        product_value_end_time, single_amount, asset_count,
+        total_amount, subject_code, memo,
+        create_time, create_by, modify_time,
+        modify_by)
+        values (#{id,jdbcType=BIGINT}, #{creditBusinessCode,jdbcType=VARCHAR}, #{batchNo,jdbcType=VARCHAR},
+        #{productDayCount,jdbcType=INTEGER}, #{contractDayCount,jdbcType=INTEGER}, #{valueStartTime,jdbcType=TIMESTAMP},
+        #{valueEndTime,jdbcType=TIMESTAMP}, #{freeStartTime,jdbcType=TIMESTAMP}, #{freeEndTime,jdbcType=TIMESTAMP},
+        #{saleStartTime,jdbcType=TIMESTAMP}, #{saleEndTime,jdbcType=TIMESTAMP}, #{productValueStartTime,jdbcType=TIMESTAMP},
+        #{productValueEndTime,jdbcType=TIMESTAMP}, #{singleAmount,jdbcType=DECIMAL}, #{assetCount,jdbcType=INTEGER},
+        #{totalAmount,jdbcType=DECIMAL}, #{subjectCode,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP},
+        #{modifyBy,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zb.fincore.ams.service.dal.model.IssuePlan" keyProperty="id">
+        insert into ams_issue_plan
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="creditBusinessCode != null" >
+                credit_business_code,
+            </if>
+            <if test="batchNo != null" >
+                batch_no,
+            </if>
+            <if test="productDayCount != null" >
+                product_day_count,
+            </if>
+            <if test="contractDayCount != null" >
+                contract_day_count,
+            </if>
+            <if test="valueStartTime != null" >
+                value_start_time,
+            </if>
+            <if test="valueEndTime != null" >
+                value_end_time,
+            </if>
+            <if test="freeStartTime != null" >
+                free_start_time,
+            </if>
+            <if test="freeEndTime != null" >
+                free_end_time,
+            </if>
+            <if test="saleStartTime != null" >
+                sale_start_time,
+            </if>
+            <if test="saleEndTime != null" >
+                sale_end_time,
+            </if>
+            <if test="productValueStartTime != null" >
+                product_value_start_time,
+            </if>
+            <if test="productValueEndTime != null" >
+                product_value_end_time,
+            </if>
+            <if test="singleAmount != null" >
+                single_amount,
+            </if>
+            <if test="assetCount != null" >
+                asset_count,
+            </if>
+            <if test="totalAmount != null" >
+                total_amount,
+            </if>
+            <if test="subjectCode != null" >
+                subject_code,
+            </if>
+            <if test="memo != null" >
+                memo,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="modifyTime != null" >
+                modify_time,
+            </if>
+            <if test="modifyBy != null" >
+                modify_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="creditBusinessCode != null" >
+                #{creditBusinessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="batchNo != null" >
+                #{batchNo,jdbcType=VARCHAR},
+            </if>
+            <if test="productDayCount != null" >
+                #{productDayCount,jdbcType=INTEGER},
+            </if>
+            <if test="contractDayCount != null" >
+                #{contractDayCount,jdbcType=INTEGER},
+            </if>
+            <if test="valueStartTime != null" >
+                #{valueStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="valueEndTime != null" >
+                #{valueEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="freeStartTime != null" >
+                #{freeStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="freeEndTime != null" >
+                #{freeEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="saleStartTime != null" >
+                #{saleStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="saleEndTime != null" >
+                #{saleEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productValueStartTime != null" >
+                #{productValueStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productValueEndTime != null" >
+                #{productValueEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="singleAmount != null" >
+                #{singleAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="assetCount != null" >
+                #{assetCount,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null" >
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="subjectCode != null" >
+                #{subjectCode,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null" >
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null" >
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null" >
+                #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zb.fincore.ams.service.dal.model.IssuePlan" >
+        update ams_issue_plan
+        <set >
+            <if test="creditBusinessCode != null" >
+                credit_business_code = #{creditBusinessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="batchNo != null" >
+                batch_no = #{batchNo,jdbcType=VARCHAR},
+            </if>
+            <if test="productDayCount != null" >
+                product_day_count = #{productDayCount,jdbcType=INTEGER},
+            </if>
+            <if test="contractDayCount != null" >
+                contract_day_count = #{contractDayCount,jdbcType=INTEGER},
+            </if>
+            <if test="valueStartTime != null" >
+                value_start_time = #{valueStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="valueEndTime != null" >
+                value_end_time = #{valueEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="freeStartTime != null" >
+                free_start_time = #{freeStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="freeEndTime != null" >
+                free_end_time = #{freeEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="saleStartTime != null" >
+                sale_start_time = #{saleStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="saleEndTime != null" >
+                sale_end_time = #{saleEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productValueStartTime != null" >
+                product_value_start_time = #{productValueStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productValueEndTime != null" >
+                product_value_end_time = #{productValueEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="singleAmount != null" >
+                single_amount = #{singleAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="assetCount != null" >
+                asset_count = #{assetCount,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null" >
+                total_amount = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="subjectCode != null" >
+                subject_code = #{subjectCode,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null" >
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null" >
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null" >
+                modify_by = #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zb.fincore.ams.service.dal.model.IssuePlan" >
+        update ams_issue_plan
+        set credit_business_code = #{creditBusinessCode,jdbcType=VARCHAR},
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+        product_day_count = #{productDayCount,jdbcType=INTEGER},
+        contract_day_count = #{contractDayCount,jdbcType=INTEGER},
+        value_start_time = #{valueStartTime,jdbcType=TIMESTAMP},
+        value_end_time = #{valueEndTime,jdbcType=TIMESTAMP},
+        free_start_time = #{freeStartTime,jdbcType=TIMESTAMP},
+        free_end_time = #{freeEndTime,jdbcType=TIMESTAMP},
+        sale_start_time = #{saleStartTime,jdbcType=TIMESTAMP},
+        sale_end_time = #{saleEndTime,jdbcType=TIMESTAMP},
+        product_value_start_time = #{productValueStartTime,jdbcType=TIMESTAMP},
+        product_value_end_time = #{productValueEndTime,jdbcType=TIMESTAMP},
+        single_amount = #{singleAmount,jdbcType=DECIMAL},
+        asset_count = #{assetCount,jdbcType=INTEGER},
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+        subject_code = #{subjectCode,jdbcType=VARCHAR},
+        memo = #{memo,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+        modify_by = #{modifyBy,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!--授信表导出列表-->
+    <select id="queryPlanListForExport" resultType="com.zb.fincore.ams.service.dal.model.ExportBusinessCredit" parameterType="java.lang.Long">
+        SELECT asset.asset_code,credit.credit_limit_amount,
+		plan.credit_business_code, plan.batch_no, plan.product_day_count, plan.contract_day_count,
+		plan.value_start_time,plan.value_end_time, plan.free_start_time,plan.free_end_time,
+		plan.sale_start_time,plan.sale_end_time, plan.product_value_start_time,
+		plan.product_value_end_time
+		from ams_asset_issue_relation relation
+			LEFT JOIN ams_asset asset on asset.asset_code = relation.asset_code
+			LEFT JOIN ams_issue_plan plan on plan.id = relation.issue_id
+			LEFT JOIN ams_business_credit credit on credit.batch_no = plan.batch_no
+        where 1=1
+    </select>
+
+    <!--根据资产编码查询发行计划-->
+    <select id="queryIssuePlanByAssetCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT plan.id, plan.credit_business_code, plan.batch_no, plan.product_day_count, plan.contract_day_count,
+        plan.value_start_time,plan.value_end_time, plan.free_start_time,plan.free_end_time,
+        plan.sale_start_time, plan.sale_end_time, plan.product_value_start_time,
+        plan.product_value_end_time, plan.single_amount, plan.asset_count, plan.total_amount, plan.subject_code,
+        plan.memo,plan.create_time, plan.create_by, plan.modify_time, plan.modify_by
+		from ams_asset_issue_relation relation
+			LEFT JOIN ams_issue_plan plan on plan.id = relation.issue_id
+        where relation.asset_code =  #{assetCode,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

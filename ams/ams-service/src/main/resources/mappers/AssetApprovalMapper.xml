@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.AssetApprovalDao">
+    <resultMap id="BaseResultMap" type="com.zb.fincore.ams.service.dal.model.AssetApproval">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="asset_id" property="assetId" jdbcType="BIGINT"/>
+        <result column="asset_code" property="assetCode" jdbcType="VARCHAR"/>
+        <result column="sign" property="sign" jdbcType="VARCHAR"/>
+        <result column="approval_status" property="approvalStatus" jdbcType="TINYINT"/>
+        <result column="approval_suggestion" property="approvalSuggestion" jdbcType="VARCHAR"/>
+        <result column="approval_by" property="approvalBy" jdbcType="VARCHAR"/>
+        <result column="approval_time" property="approvalTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, asset_id, asset_code, sign, approval_status, approval_suggestion, approval_by,
+        approval_time, create_time, create_by
+    </sql>
+
+    <sql id="filterSql">
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="assetId != null">
+                and asset_id = #{assetId,jdbcType=BIGINT}
+            </if>
+            <if test="assetCode != null and assetCode != ''">
+                and asset_code = #{assetCode,jdbcType=VARCHAR}
+            </if>
+            <if test="sign != null and sign != ''">
+                and sign = #{sign,jdbcType=VARCHAR}
+            </if>
+            <if test="approvalStatus != null and approvalStatus != ''">
+                and approval_status = #{approvalStatus,jdbcType=TINYINT}
+            </if>
+            <if test="approvalBy != null and approvalBy != ''">
+                and approval_by = #{approvalBy,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_asset_approval
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer"
+            parameterType="com.zb.fincore.ams.service.dal.model.AssetApproval">
+        select
+        COUNT(1)
+        from ams_asset_approval
+        <include refid="filterSql"/>
+    </select>
+
+    <select id="select" resultMap="BaseResultMap"
+            parameterType="com.zb.fincore.ams.service.dal.model.AssetApproval">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_asset_approval
+        <include refid="filterSql"/>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ams_asset_approval
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zb.fincore.ams.service.dal.model.AssetApproval"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ams_asset_approval (asset_id, asset_code,
+        sign, approval_status, approval_suggestion,
+        approval_by, approval_time,
+        create_by)
+        values (#{assetId,jdbcType=BIGINT}, #{assetCode,jdbcType=VARCHAR},
+        #{sign,jdbcType=VARCHAR}, #{approvalStatus,jdbcType=TINYINT}, #{approvalSuggestion,jdbcType=VARCHAR},
+        #{approvalBy,jdbcType=VARCHAR}, #{approvalTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zb.fincore.ams.service.dal.model.AssetApproval"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ams_asset_approval
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="assetId != null">
+                asset_id,
+            </if>
+            <if test="assetCode != null">
+                asset_code,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="approvalStatus != null">
+                approval_status,
+            </if>
+            <if test="approvalSuggestion != null">
+                approval_suggestion,
+            </if>
+            <if test="approvalBy != null">
+                approval_by,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="assetId != null">
+                #{assetId,jdbcType=BIGINT},
+            </if>
+            <if test="assetCode != null">
+                #{assetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="approvalStatus != null">
+                #{approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="approvalSuggestion != null">
+                #{approvalSuggestion,jdbcType=VARCHAR},
+            </if>
+            <if test="approvalBy != null">
+                #{approvalBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zb.fincore.ams.service.dal.model.AssetApproval">
+        update ams_asset_approval
+        <set>
+            <if test="assetId != null">
+                asset_id = #{assetId,jdbcType=BIGINT},
+            </if>
+            <if test="assetCode != null">
+                asset_code = #{assetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null">
+                sign = #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="approvalStatus != null">
+                approval_status = #{approvalStatus,jdbcType=TINYINT},
+            </if>
+            <if test="approvalSuggestion != null">
+                approval_suggestion = #{approvalSuggestion,jdbcType=VARCHAR},
+            </if>
+            <if test="approvalBy != null">
+                approval_by = #{approvalBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zb.fincore.ams.service.dal.model.AssetApproval">
+        update ams_asset_approval
+        set asset_id = #{assetId,jdbcType=BIGINT},
+        asset_code = #{assetCode,jdbcType=VARCHAR},
+        sign = #{sign,jdbcType=VARCHAR},
+        approval_status = #{approvalStatus,jdbcType=TINYINT},
+        approval_suggestion = #{approvalSuggestion,jdbcType=VARCHAR},
+        approval_by = #{approvalBy,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

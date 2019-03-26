@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.AssetIssueRelationDao">
+    <resultMap id="BaseResultMap" type="com.zb.fincore.ams.service.dal.model.AssetIssueRelation">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="asset_code" property="assetCode" jdbcType="VARCHAR"/>
+        <result column="issue_id" property="issueId" jdbcType="BIGINT"/>
+        <result column="batch_no" property="batchNo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.zb.fincore.ams.service.dal.model.AssetIssueRelation">
+    insert into ams_asset_issue_relation (id, asset_code, issue_id, 
+      batch_no, create_time, create_by, 
+      modify_time, modify_by)
+    values (#{id,jdbcType=BIGINT}, #{assetCode,jdbcType=VARCHAR}, #{issueId,jdbcType=BIGINT}, 
+      #{batchNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zb.fincore.ams.service.dal.model.AssetIssueRelation">
+        insert into ams_asset_issue_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="assetCode != null">
+                asset_code,
+            </if>
+            <if test="issueId != null">
+                issue_id,
+            </if>
+            <if test="batchNo != null">
+                batch_no,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="modifyBy != null">
+                modify_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="assetCode != null">
+                #{assetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="issueId != null">
+                #{issueId,jdbcType=BIGINT},
+            </if>
+            <if test="batchNo != null">
+                #{batchNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectApprovaledAssetByCode" resultType="com.zb.fincore.ams.service.dal.model.Asset" parameterType="java.lang.String">
+        SELECT asset.id FROM ams_asset asset
+            LEFT JOIN ams_asset_issue_relation relation ON asset.asset_code = relation.asset_code
+            where relation.batch_no = (
+                SELECT relation.batch_no from ams_asset_issue_relation relation
+                where relation.asset_code = #{assetCode,jdbcType=VARCHAR}
+            )
+            and asset.approval_status = '4'
+    </select>
+
+    <select id="selectUnApprovalAssetByCode" resultType="com.zb.fincore.ams.service.dal.model.Asset" parameterType="java.lang.String">
+        SELECT asset.id FROM ams_asset asset
+        LEFT JOIN ams_asset_issue_relation relation ON asset.asset_code = relation.asset_code
+        where relation.batch_no = (
+        SELECT relation.batch_no from ams_asset_issue_relation relation
+        where relation.asset_code = #{assetCode,jdbcType=VARCHAR}
+        )
+        and asset.approval_status = '2'
+    </select>
+
+    <update id="updateAssetByCode" parameterType="java.lang.String">
+        update ams_asset asset set asset.storage_status = '1'
+        where asset.asset_code in (select relation.asset_code from ams_asset_issue_relation relation
+            where relation.batch_no = (
+                SELECT relation.batch_no from ams_asset_issue_relation relation
+                where relation.asset_code = #{assetCode,jdbcType=VARCHAR})
+          )
+    </update>
+
+    <update id="updateAssetApprovalFail" parameterType="java.lang.String">
+        update ams_asset asset set asset.approval_status = '4',asset.collect_status = '99'
+        where asset.asset_code in (select relation.asset_code from ams_asset_issue_relation relation
+        where relation.batch_no = (
+        SELECT relation.batch_no from ams_asset_issue_relation relation
+        where relation.asset_code = #{assetCode,jdbcType=VARCHAR})
+        )
+    </update>
+
+</mapper>

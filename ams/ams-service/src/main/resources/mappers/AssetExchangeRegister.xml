@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.AssetExchangeRegisterDao">
+    <resultMap id="BaseResultMap" type="com.zb.fincore.ams.service.dal.model.AssetExchangeRegister">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="asset_code" property="assetCode" jdbcType="VARCHAR"/>
+        <result column="parent_asset_code" property="parentAssetCode" jdbcType="VARCHAR"/>
+        <result column="exchange_register_batch_no" property="exchangeRegisterBatchNo" jdbcType="VARCHAR"/>
+        <result column="trade_inst_code" property="tradeInstCode" jdbcType="VARCHAR"/>
+        <result column="delisted_inst_code" property="delistedInstCode" jdbcType="VARCHAR"/>
+        <result column="listed_inst_code" property="listedInstCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="register_status" property="registerStatus" jdbcType="VARCHAR"/>
+        <result column="register_name" property="registerName" jdbcType="VARCHAR"/>
+        <result column="register_rate" property="registerRate" jdbcType="DECIMAL"/>
+        <result column="register_amount" property="registerAmount" jdbcType="DECIMAL"/>
+        <result column="register_value_start_time" property="registerValueStartTime" jdbcType="TIMESTAMP"/>
+        <result column="register_value_end_time" property="registerValueEndTime" jdbcType="TIMESTAMP"/>
+        <result column="register_expire_time" property="registerExpireTime" jdbcType="TIMESTAMP"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="value_days" property="valueDays" jdbcType="INTEGER"/>
+        <result column="repayment_type" property="repaymentType" jdbcType="TINYINT"/>
+        <result column="memo" property="memo" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, asset_code, parent_asset_code, exchange_register_batch_no, trade_inst_code, delisted_inst_code,
+        listed_inst_code, status, register_status, register_name, register_rate, register_amount,
+        register_value_start_time, register_value_end_time, register_expire_time, register_time,
+        value_days,repayment_type,
+        memo, version, create_time, create_by, modify_time, modify_by
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_asset_exchange_register
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ams_asset_exchange_register
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zb.fincore.ams.service.dal.model.AssetExchangeRegister">
+        insert into ams_asset_exchange_register (id, asset_code, parent_asset_code,
+        exchange_register_batch_no, trade_inst_code,
+        delisted_inst_code, listed_inst_code, status,
+        register_status, register_name, register_rate,
+        register_amount, register_value_start_time,
+        register_value_end_time, register_expire_time,
+        register_time, value_days,repayment_type,
+        memo, version,
+        create_time, create_by, modify_time,
+        modify_by)
+        values (#{id,jdbcType=BIGINT}, #{assetCode,jdbcType=VARCHAR}, #{parentAssetCode,jdbcType=VARCHAR},
+        #{exchangeRegisterBatchNo,jdbcType=VARCHAR}, #{tradeInstCode,jdbcType=VARCHAR},
+        #{delistedInstCode,jdbcType=VARCHAR}, #{listedInstCode,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+        #{registerStatus,jdbcType=VARCHAR}, #{registerName,jdbcType=VARCHAR}, #{registerRate,jdbcType=DECIMAL},
+        #{registerAmount,jdbcType=DECIMAL}, #{registerValueStartTime,jdbcType=TIMESTAMP},
+        #{registerValueEndTime,jdbcType=TIMESTAMP}, #{registerExpireTime,jdbcType=TIMESTAMP},
+        #{registerTime,jdbcType=TIMESTAMP},#{valueDays,jdbcType=TIMESTAMP},#{repaymentType,jdbcType=TIMESTAMP},
+        #{memo,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP},
+        #{modifyBy,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zb.fincore.ams.service.dal.model.AssetExchangeRegister">
+        insert into ams_asset_exchange_register
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="assetCode != null">
+                asset_code,
+            </if>
+            <if test="parentAssetCode != null">
+                parent_asset_code,
+            </if>
+            <if test="exchangeRegisterBatchNo != null">
+                exchange_register_batch_no,
+            </if>
+            <if test="tradeInstCode != null">
+                trade_inst_code,
+            </if>
+            <if test="delistedInstCode != null">
+                delisted_inst_code,
+            </if>
+            <if test="listedInstCode != null">
+                listed_inst_code,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="registerStatus != null">
+                register_status,
+            </if>
+            <if test="registerName != null">
+                register_name,
+            </if>
+            <if test="registerRate != null">
+                register_rate,
+            </if>
+            <if test="registerAmount != null">
+                register_amount,
+            </if>
+            <if test="registerValueStartTime != null">
+                register_value_start_time,
+            </if>
+            <if test="registerValueEndTime != null">
+                register_value_end_time,
+            </if>
+            <if test="registerExpireTime != null">
+                register_expire_time,
+            </if>
+            <if test="registerTime != null">
+                register_time,
+            </if>
+            <if test="valueDays != null">
+                value_days,
+            </if>
+            <if test="repaymentType != null">
+                repayment_type,
+            </if>
+            <if test="memo != null">
+                memo,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="assetCode != null">
+                #{assetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="parentAssetCode != null">
+                #{parentAssetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="exchangeRegisterBatchNo != null">
+                #{exchangeRegisterBatchNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeInstCode != null">
+                #{tradeInstCode,jdbcType=VARCHAR},
+            </if>
+            <if test="delistedInstCode != null">
+                #{delistedInstCode,jdbcType=VARCHAR},
+            </if>
+            <if test="listedInstCode != null">
+                #{listedInstCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="registerStatus != null">
+                #{registerStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="registerName != null">
+                #{registerName,jdbcType=VARCHAR},
+            </if>
+            <if test="registerRate != null">
+                #{registerRate,jdbcType=DECIMAL},
+            </if>
+            <if test="registerAmount != null">
+                #{registerAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="registerValueStartTime != null">
+                #{registerValueStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerValueEndTime != null">
+                #{registerValueEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerExpireTime != null">
+                #{registerExpireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerTime != null">
+                #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="valueDays != null">
+                #{valueDays,jdbcType=INTEGER},
+            </if>
+            <if test="repaymentType != null">
+                #{repaymentType,jdbcType=TINYINT},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zb.fincore.ams.service.dal.model.AssetExchangeRegister">
+        update ams_asset_exchange_register
+        <set>
+            <if test="assetCode != null">
+                asset_code = #{assetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="parentAssetCode != null">
+                parent_asset_code = #{parentAssetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="exchangeRegisterBatchNo != null">
+                exchange_register_batch_no = #{exchangeRegisterBatchNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeInstCode != null">
+                trade_inst_code = #{tradeInstCode,jdbcType=VARCHAR},
+            </if>
+            <if test="delistedInstCode != null">
+                delisted_inst_code = #{delistedInstCode,jdbcType=VARCHAR},
+            </if>
+            <if test="listedInstCode != null">
+                listed_inst_code = #{listedInstCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="registerStatus != null">
+                register_status = #{registerStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="registerName != null">
+                register_name = #{registerName,jdbcType=VARCHAR},
+            </if>
+            <if test="registerRate != null">
+                register_rate = #{registerRate,jdbcType=DECIMAL},
+            </if>
+            <if test="registerAmount != null">
+                register_amount = #{registerAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="registerValueStartTime != null">
+                register_value_start_time = #{registerValueStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerValueEndTime != null">
+                register_value_end_time = #{registerValueEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerExpireTime != null">
+                register_expire_time = #{registerExpireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerTime != null">
+                register_time = #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="valueDays != null">
+                value_days = #{valueDays,jdbcType=INTEGER},
+            </if>
+            <if test="repaymentType != null">
+                repayment_type = #{repaymentType,jdbcType=TINYINT},
+            </if>
+            <if test="memo != null">
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyBy != null">
+                modify_by = #{modifyBy,jdbcType=VARCHAR},
+            </if>
+            version = version + 1
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zb.fincore.ams.service.dal.model.AssetExchangeRegister">
+        update ams_asset_exchange_register
+        set asset_code = #{assetCode,jdbcType=VARCHAR},
+          parent_asset_code = #{parentAssetCode,jdbcType=VARCHAR},
+          exchange_register_batch_no = #{exchangeRegisterBatchNo,jdbcType=VARCHAR},
+          trade_inst_code = #{tradeInstCode,jdbcType=VARCHAR},
+          delisted_inst_code = #{delistedInstCode,jdbcType=VARCHAR},
+          listed_inst_code = #{listedInstCode,jdbcType=VARCHAR},
+          status = #{status,jdbcType=VARCHAR},
+          register_status = #{registerStatus,jdbcType=VARCHAR},
+          register_name = #{registerName,jdbcType=VARCHAR},
+          register_rate = #{registerRate,jdbcType=DECIMAL},
+          register_amount = #{registerAmount,jdbcType=DECIMAL},
+          register_value_start_time = #{registerValueStartTime,jdbcType=TIMESTAMP},
+          register_value_end_time = #{registerValueEndTime,jdbcType=TIMESTAMP},
+          register_expire_time = #{registerExpireTime,jdbcType=TIMESTAMP},
+          register_time = #{registerTime,jdbcType=TIMESTAMP},
+          memo = #{memo,jdbcType=VARCHAR},
+          modify_by = #{modifyBy,jdbcType=VARCHAR},
+          version = version + 1
+        where id = #{id,jdbcType=BIGINT}
+      </update>
+
+    <!--根据资产编码查询备案信息-->
+    <select id="selectByAssetCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_asset_exchange_register
+        where asset_code = #{assetCode,jdbcType=VARCHAR}
+    </select>
+
+    <resultMap id="ExchangeRegisterListResultMap" type="com.zb.fincore.ams.service.dal.model.AssetExchangeRegister">
+        <id column="register_id" property="id" jdbcType="BIGINT"/>
+        <result column="register_asset_code" property="assetCode" jdbcType="VARCHAR"/>
+        <result column="register_parent_asset_code" property="parentAssetCode" jdbcType="VARCHAR"/>
+        <result column="register_exchange_register_batch_no" property="exchangeRegisterBatchNo" jdbcType="VARCHAR"/>
+        <result column="register_trade_inst_code" property="tradeInstCode" jdbcType="VARCHAR"/>
+        <result column="register_delisted_inst_code" property="delistedInstCode" jdbcType="VARCHAR"/>
+        <result column="register_listed_inst_code" property="listedInstCode" jdbcType="VARCHAR"/>
+        <result column="register_status" property="status" jdbcType="VARCHAR"/>
+        <result column="register_register_status" property="registerStatus" jdbcType="VARCHAR"/>
+        <result column="register_name" property="registerName" jdbcType="VARCHAR"/>
+        <result column="register_rate" property="registerRate" jdbcType="DECIMAL"/>
+        <result column="register_amount" property="registerAmount" jdbcType="DECIMAL"/>
+        <result column="register_value_start_time" property="registerValueStartTime" jdbcType="TIMESTAMP"/>
+        <result column="register_value_end_time" property="registerValueEndTime" jdbcType="TIMESTAMP"/>
+        <result column="register_expire_time" property="registerExpireTime" jdbcType="TIMESTAMP"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="register_value_days" property="valueDays" jdbcType="INTEGER"/>
+        <result column="register_repayment_type" property="repaymentType" jdbcType="TINYINT"/>
+        <result column="register_memo" property="memo" jdbcType="VARCHAR"/>
+        <result column="register_version" property="version" jdbcType="BIGINT"/>
+        <result column="register_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="register_create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="register_modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="register_modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+        <association property="asset" javaType="com.zb.fincore.ams.service.dal.model.Asset">
+            <id column="asset_id" property="id" jdbcType="BIGINT"/>
+            <result column="asset_code" property="assetCode" jdbcType="VARCHAR"/>
+            <result column="asset_name" property="assetName" jdbcType="VARCHAR"/>
+            <result column="asset_type" property="assetType" jdbcType="TINYINT"/>
+            <result column="collect_status" property="collectStatus" jdbcType="TINYINT"/>
+            <result column="approval_require_sign" property="approvalRequireSign" jdbcType="VARCHAR"/>
+            <result column="approval_sign" property="approvalSign" jdbcType="VARCHAR"/>
+            <result column="approval_status" property="approvalStatus" jdbcType="TINYINT"/>
+            <result column="asset_amount" property="assetAmount" jdbcType="DECIMAL"/>
+            <result column="distribute_amount" property="distributeAmount" jdbcType="DECIMAL"/>
+            <result column="stock_amount" property="stockAmount" jdbcType="DECIMAL"/>
+            <result column="frozen_amount" property="frozenAmount" jdbcType="DECIMAL"/>
+            <result column="sale_amount" property="saleAmount" jdbcType="DECIMAL"/>
+            <result column="finance_subject_id" property="financeSubjectId" jdbcType="BIGINT"/>
+            <result column="finance_subject_code" property="financeSubjectCode" jdbcType="VARCHAR"/>
+            <result column="establish_time" property="establishTime" jdbcType="TIMESTAMP"/>
+            <result column="value_start_time" property="valueStartTime" jdbcType="TIMESTAMP"/>
+            <result column="value_end_time" property="valueEndTime" jdbcType="TIMESTAMP"/>
+            <result column="expire_time" property="expireTime" jdbcType="TIMESTAMP"/>
+            <result column="transfer_lock_days" property="transferLockDays" jdbcType="INTEGER"/>
+            <result column="value_days" property="valueDays" jdbcType="INTEGER"/>
+            <result column="yield_rate" property="yieldRate" jdbcType="DECIMAL"/>
+            <result column="min_invest_amount" property="minInvestAmount" jdbcType="DECIMAL"/>
+            <result column="increase_amount" property="increaseAmount" jdbcType="DECIMAL"/>
+            <result column="repayment_type" property="repaymentType" jdbcType="TINYINT"/>
+            <result column="asset_desc" property="assetDesc" jdbcType="VARCHAR"/>
+            <result column="finance_project" property="financeProject" jdbcType="VARCHAR"/>
+            <result column="parent_asset_code" property="parentAssetCode" jdbcType="VARCHAR"/>
+            <result column="provide_loan_code" property="provideLoanCode" jdbcType="VARCHAR"/>
+            <result column="project_desc" property="projectDesc" jdbcType="LONGVARCHAR"/>
+            <result column="repay_guarentee_mode" property="repayGuarenteeMode" jdbcType="LONGVARCHAR"/>
+            <result column="credit_mode" property="creditMode" jdbcType="LONGVARCHAR"/>
+            <result column="register_type" property="registerType" jdbcType="TINYINT"/>
+            <result column="storage_status" property="storageStatus" jdbcType="TINYINT"/>
+            <result column="publish_info" property="publishInfo" jdbcType="LONGVARCHAR"/>
+            <result column="version" property="version" jdbcType="INTEGER"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+            <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+            <result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+        </association>
+        <association property="fileTemplateParam" javaType="com.zb.fincore.ams.service.dal.model.FileTemplateParam">
+            <id column="param_id" property="id" jdbcType="BIGINT" />
+            <result column="param_template_code" property="templateCode" jdbcType="VARCHAR" />
+            <result column="param_asset_code" property="assetCode" jdbcType="VARCHAR" />
+            <result column="param_contract_batch_no" property="contractBatchNo" jdbcType="VARCHAR" />
+            <result column="param_template_content" property="templateContent" jdbcType="LONGVARCHAR" />
+            <result column="param_template_param" property="templateParam" jdbcType="LONGVARCHAR" />
+            <result column="param_step_code" property="stepCode" jdbcType="INTEGER" />
+            <result column="param_status" property="status" jdbcType="TINYINT" />
+            <result column="param_version" property="version" jdbcType="BIGINT" />
+            <result column="param_create_time" property="createTime" jdbcType="TIMESTAMP" />
+            <result column="param_create_by" property="createBy" jdbcType="VARCHAR" />
+            <result column="param_modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+            <result column="param_modify_by" property="modifyBy" jdbcType="VARCHAR" />
+        </association>
+    </resultMap>
+
+    <sql id="Exchange_Register_Column_List">
+        register.id as register_id, register.asset_code as register_asset_code,
+        register.parent_asset_code as register_parent_asset_code,register.exchange_register_batch_no as register_exchange_register_batch_no,
+        register.trade_inst_code as register_trade_inst_code, register.delisted_inst_code as register_delisted_inst_code,
+        register.listed_inst_code as register_listed_inst_code, register.status as register_status,
+        register.register_status as register_register_status,register.register_name as register_name,
+        register.register_rate as register_rate, register.register_amount as register_amount,
+        register.register_value_start_time as register_value_start_time, register.register_value_end_time as register_value_end_time,
+        register.register_expire_time, register.register_time,
+        register.value_days as register_value_days,register.repayment_type as register_repayment_type,
+        register.memo as register_memo,
+        register.version as register_version, register.create_time as register_create_time,
+        register.create_by as register_create_by, register.modify_time as register_modify_time,
+        register.modify_by as register_modify_by,
+        asset.id as asset_id, asset.asset_code, asset.asset_name, asset.asset_type, asset.collect_status,
+        asset.approval_require_sign, asset.approval_sign, asset.approval_status, asset.asset_amount,
+        asset.distribute_amount, asset.stock_amount, asset.frozen_amount, asset.sale_amount,
+        asset.finance_subject_id, asset.finance_subject_code, asset.establish_time, asset.value_start_time,
+        asset.value_end_time, asset.expire_time, asset.transfer_lock_days, asset.value_days,
+        asset.yield_rate, asset.min_invest_amount,asset.increase_amount, asset.repayment_type, asset.asset_desc,
+        asset.finance_project, asset.parent_asset_code,asset.provide_loan_code,
+        asset.project_desc, asset.repay_guarentee_mode, asset.credit_mode, asset.version,asset.register_type,
+        asset.storage_status, asset.publish_info,
+        asset.create_time, asset.create_by, asset.modify_time, asset.modify_by,
+        param.id as param_id, param.template_code as param_template_code, param.asset_code as param_asset_code,
+        param.contract_batch_no as param_contract_batch_no,param.template_content as param_template_content,
+        param.template_param as param_template_param, param.step_code as param_step_code,
+        param.status as param_status,param.version as param_version,
+        param.create_time as  param_create_time,param.create_by as param_create_by,
+        param.modify_time as param_modify_time, param.modify_by as param_modify_by
+    </sql>
+
+    <!--根据资产编码查询备案记录列表-->
+    <select id="selectExchangeRegisterListByAssetCode" resultMap="ExchangeRegisterListResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Exchange_Register_Column_List"/>
+        from ams_asset_exchange_register register
+        left join ams_asset asset on asset.asset_code = register.parent_asset_code
+        left join ams_file_template_param param on param.asset_code = register.asset_code
+        where 1=1
+        <if test="assetCode != null">
+            and register.parent_asset_code = #{assetCode,jdbcType=VARCHAR}
+        </if>
+        order by register.create_time desc
+    </select>
+
+    <!--根据资产编码查询备案记录列表数量-->
+    <select id="selectExchangeRegisterListByAssetCodeCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1)
+        from ams_asset_exchange_register register
+        left join ams_asset asset on asset.asset_code = register.parent_asset_code
+        left join ams_file_template_param param on param.asset_code = register.asset_code
+        where 1=1
+        <if test="assetCode != null">
+            and register.parent_asset_code = #{assetCode,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <!--校验备案名称是否重复-->
+    <select id="selectByAssetRegisterName" resultType="java.lang.Integer" parameterType="com.zb.fincore.ams.service.dal.model.AssetExchangeRegister">
+        select count(1)
+        from ams_asset_exchange_register register
+        where register.register_name = #{registerName,jdbcType=VARCHAR}
+        and register.register_status != #{registerStatus,jdbcType=VARCHAR}
+    </select>
+</mapper>

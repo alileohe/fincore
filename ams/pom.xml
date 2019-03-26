@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.zb.fincore</groupId>
+        <artifactId>parent-pom</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>ams-parent-pom</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <zb.fincore.ams.facade.version>1.0.0-SNAPSHOT</zb.fincore.ams.facade.version>
+        <zb.fincore.ams.service.version>1.0.0-SNAPSHOT</zb.fincore.ams.service.version>
+        <zb.fincore.ams.web.version>1.0.0-SNAPSHOT</zb.fincore.ams.web.version>
+    </properties>
+
+    <modules>
+        <module>ams-facade</module>
+        <module>ams-service</module>
+        <module>ams-web</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.zb.fincore</groupId>
+                <artifactId>fincore-common-utils</artifactId>
+                <version>1.0.4-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zb.fincore</groupId>
+                <artifactId>ams-facade</artifactId>
+                <version>${zb.fincore.ams.facade.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zb.fincore</groupId>
+                <artifactId>ams-service</artifactId>
+                <version>${zb.fincore.ams.service.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zb.fincore</groupId>
+                <artifactId>ams-web</artifactId>
+                <version>${zb.fincore.ams.web.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

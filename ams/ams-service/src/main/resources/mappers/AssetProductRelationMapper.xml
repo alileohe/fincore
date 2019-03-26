@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.AssetProductRelationDao">
+    <resultMap id="BaseResultMap" type="com.zb.fincore.ams.service.dal.model.AssetProductRelation">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="product_code" property="productCode" jdbcType="VARCHAR"/>
+        <result column="pool_id" property="poolId" jdbcType="BIGINT"/>
+        <result column="pool_code" property="poolCode" jdbcType="VARCHAR"/>
+        <result column="asset_id" property="assetId" jdbcType="BIGINT"/>
+        <result column="asset_code" property="assetCode" jdbcType="VARCHAR"/>
+        <result column="asset_amount" property="assetAmount" jdbcType="DECIMAL"/>
+        <result column="sale_amount" property="saleAmount" jdbcType="DECIMAL"/>
+        <result column="release_amount" property="releaseAmount" jdbcType="DECIMAL"/>
+        <result column="product_expire_time" property="productExpireTime" jdbcType="TIMESTAMP"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, product_code, pool_id, pool_code, asset_id, asset_code, asset_amount, sale_amount,
+        release_amount, product_expire_time, version, create_time, create_by, modify_time, modify_by
+    </sql>
+
+    <sql id="filterSql">
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="productCode != null and productCode != ''">
+                and product_code = #{productCode,jdbcType=VARCHAR}
+            </if>
+            <if test="poolId != null">
+                and pool_id = #{poolId,jdbcType=BIGINT}
+            </if>
+            <if test="poolCode != null and poolCode != ''">
+                and pool_code = #{poolCode,jdbcType=VARCHAR}
+            </if>
+            <if test="assetId != null">
+                and asset_id = #{assetId,jdbcType=BIGINT}
+            </if>
+            <if test="assetCode != null and assetCode != ''">
+                and asset_code = #{assetCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_asset_product_relation
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer"
+            parameterType="com.zb.fincore.ams.service.dal.model.AssetProductRelation">
+        select
+        COUNT(1)
+        from ams_asset_product_relation
+        <include refid="filterSql"/>
+    </select>
+
+    <!--增加资产名和资产到期时间-->
+    <select id="select" resultType="com.zb.fincore.ams.service.dal.model.AssetProductRelation"
+            parameterType="com.zb.fincore.ams.service.dal.model.AssetProductRelation">
+        select
+        rel.id, rel.product_code, rel.pool_id, rel.pool_code, rel.asset_id, rel.asset_code, rel.asset_amount,
+        rel.sale_amount,rel.release_amount, rel.product_expire_time, rel.version, rel.create_time,
+        rel.create_by, rel.modify_time,rel.modify_by,asset.asset_name,asset.expire_time asset_expire_time,asset.asset_type
+        from ams_asset_product_relation rel LEFT join ams_asset asset on asset.asset_code = rel.asset_code
+        <where>
+            <if test="id != null">
+                and rel.id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="productCode != null and productCode != ''">
+                and rel.product_code = #{productCode,jdbcType=VARCHAR}
+            </if>
+            <if test="poolId != null">
+                and rel.pool_id = #{poolId,jdbcType=BIGINT}
+            </if>
+            <if test="poolCode != null and poolCode != ''">
+                and rel.pool_code = #{poolCode,jdbcType=VARCHAR}
+            </if>
+            <if test="assetId != null">
+                and rel.asset_id = #{assetId,jdbcType=BIGINT}
+            </if>
+            <if test="assetCode != null and assetCode != ''">
+                and rel.asset_code = #{assetCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectOne" resultMap="BaseResultMap"
+            parameterType="com.zb.fincore.ams.service.dal.model.AssetProductRelation">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_asset_product_relation
+        <include refid="filterSql"/>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ams_asset_product_relation
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zb.fincore.ams.service.dal.model.AssetProductRelation"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ams_asset_product_relation (product_code, pool_id,
+        pool_code, asset_id, asset_code,
+        asset_amount, sale_amount, release_amount,
+        product_expire_time, create_by, modify_by)
+        values (#{productCode,jdbcType=VARCHAR}, #{poolId,jdbcType=BIGINT},
+        #{poolCode,jdbcType=VARCHAR}, #{assetId,jdbcType=BIGINT}, #{assetCode,jdbcType=VARCHAR},
+        #{assetAmount,jdbcType=DECIMAL}, #{saleAmount,jdbcType=DECIMAL}, #{releaseAmount,jdbcType=DECIMAL},
+        #{productExpireTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zb.fincore.ams.service.dal.model.AssetProductRelation"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ams_asset_product_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productCode != null">
+                product_code,
+            </if>
+            <if test="poolId != null">
+                pool_id,
+            </if>
+            <if test="poolCode != null">
+                pool_code,
+            </if>
+            <if test="assetId != null">
+                asset_id,
+            </if>
+            <if test="assetCode != null">
+                asset_code,
+            </if>
+            <if test="assetAmount != null">
+                asset_amount,
+            </if>
+            <if test="saleAmount != null">
+                sale_amount,
+            </if>
+            <if test="releaseAmount != null">
+                release_amount,
+            </if>
+            <if test="productExpireTime != null">
+                product_expire_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="modifyBy != null">
+                modify_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productCode != null">
+                #{productCode,jdbcType=VARCHAR},
+            </if>
+            <if test="poolId != null">
+                #{poolId,jdbcType=BIGINT},
+            </if>
+            <if test="poolCode != null">
+                #{poolCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assetId != null">
+                #{assetId,jdbcType=BIGINT},
+            </if>
+            <if test="assetCode != null">
+                #{assetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assetAmount != null">
+                #{assetAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="saleAmount != null">
+                #{saleAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="releaseAmount != null">
+                #{releaseAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="productExpireTime != null">
+                #{productExpireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyBy != null">
+                #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateSelectiveWithLock" parameterType="com.zb.fincore.ams.service.dal.model.AssetProductRelation">
+        update ams_asset_product_relation
+        <set>
+            <if test="productCode != null">
+                product_code = #{productCode,jdbcType=VARCHAR},
+            </if>
+            <if test="poolId != null">
+                pool_id = #{poolId,jdbcType=BIGINT},
+            </if>
+            <if test="poolCode != null">
+                pool_code = #{poolCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assetId != null">
+                asset_id = #{assetId,jdbcType=BIGINT},
+            </if>
+            <if test="assetCode != null">
+                asset_code = #{assetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assetAmount != null">
+                asset_amount = #{assetAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="saleAmount != null">
+                sale_amount = #{saleAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="releaseAmount != null">
+                release_amount = #{releaseAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="productExpireTime != null">
+                product_expire_time = #{productExpireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                modify_by = #{modifyBy,jdbcType=VARCHAR},
+            </if>
+            version = version + 1
+        </set>
+        where id = #{id,jdbcType=BIGINT} and version = #{version,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zb.fincore.ams.service.dal.model.AssetProductRelation">
+        update ams_asset_product_relation
+        set product_code = #{productCode,jdbcType=VARCHAR},
+        pool_id = #{poolId,jdbcType=BIGINT},
+        pool_code = #{poolCode,jdbcType=VARCHAR},
+        asset_id = #{assetId,jdbcType=BIGINT},
+        asset_code = #{assetCode,jdbcType=VARCHAR},
+        asset_amount = #{assetAmount,jdbcType=DECIMAL},
+        sale_amount = #{saleAmount,jdbcType=DECIMAL},
+        release_amount = #{releaseAmount,jdbcType=DECIMAL},
+        product_expire_time = #{productExpireTime,jdbcType=TIMESTAMP},
+        modify_by = #{modifyBy,jdbcType=VARCHAR},
+        version = version + 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

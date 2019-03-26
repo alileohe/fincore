@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.FileTemplateDao">
+    <resultMap id="BaseResultMap" type="com.zb.fincore.ams.service.dal.model.FileTemplate">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="template_code" jdbcType="VARCHAR" property="templateCode"/>
+        <result column="file_serial_no" jdbcType="VARCHAR" property="fileSerialNo"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_path" jdbcType="VARCHAR" property="filePath"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="modify_by" jdbcType="VARCHAR" property="modifyBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, template_code, file_serial_no, file_name, file_path, create_time, create_by, 
+    modify_time, modify_by
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_file_template
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ams_file_template
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.zb.fincore.ams.service.dal.model.FileTemplate">
+        insert into ams_file_template
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="templateCode != null">
+                template_code,
+            </if>
+            <if test="fileSerialNo != null">
+                file_serial_no,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="filePath != null">
+                file_path,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="modifyBy != null">
+                modify_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="templateCode != null">
+                #{templateCode,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSerialNo != null">
+                #{fileSerialNo,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zb.fincore.ams.service.dal.model.FileTemplate">
+        update ams_file_template
+        <set>
+            <if test="templateCode != null">
+                template_code = #{templateCode,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSerialNo != null">
+                file_serial_no = #{fileSerialNo,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                file_path = #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                modify_by = #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectFileTemplateByTemplateCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_file_template
+        where template_code = #{code,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

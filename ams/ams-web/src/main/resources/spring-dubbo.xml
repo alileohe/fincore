@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="ams"/>
+
+    <dubbo:registry protocol="zookeeper" address="${config.zk.address}" check="false"/>
+
+    <dubbo:protocol name="dubbo" port="${config.dubbo.port}" accesslog="false"/>
+
+    <bean id="assetApprovalServiceFacade" class="com.zb.fincore.ams.facade.impl.AssetApprovalServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.AssetApprovalServiceFacade"
+                   ref="assetApprovalServiceFacade"/>
+    
+    <bean id="assetCheckServiceFacade" class="com.zb.fincore.ams.facade.impl.AssetCheckServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.AssetCheckServiceFacade"
+                   ref="assetCheckServiceFacade"/>
+            
+    <bean id="assetPoolRelationServiceFacade" class="com.zb.fincore.ams.facade.impl.AssetPoolRelationServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.AssetPoolRelationServiceFacade"
+                   ref="assetPoolRelationServiceFacade"/>
+
+    <bean id="assetProductRelationServiceFacade" class="com.zb.fincore.ams.facade.impl.AssetProductRelationServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.AssetProductRelationServiceFacade"
+                   ref="assetProductRelationServiceFacade"/>
+
+    <bean id="assetRepayPlanServiceFacade" class="com.zb.fincore.ams.facade.impl.AssetRepayPlanServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.AssetRepayPlanServiceFacade"
+                   ref="assetRepayPlanServiceFacade"/>
+
+    <bean id="assetServiceFacade" class="com.zb.fincore.ams.facade.impl.AssetServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.AssetServiceFacade"
+                   ref="assetServiceFacade"/>
+
+    <bean id="financeSubjectServiceFacade" class="com.zb.fincore.ams.facade.impl.FinanceSubjectServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.FinanceSubjectServiceFacade"
+                   ref="financeSubjectServiceFacade"/>
+
+    <bean id="poolServiceFacade" class="com.zb.fincore.ams.facade.impl.PoolServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.PoolServiceFacade"
+                   ref="poolServiceFacade"/>
+
+    <bean id="trusteeServiceFacade" class="com.zb.fincore.ams.facade.impl.TrusteeServiceFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.TrusteeServiceFacade"
+                   ref="trusteeServiceFacade"/>
+
+    <bean id="batchAssetFacade" class="com.zb.fincore.ams.facade.impl.BatchAssetFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.BatchAssetFacade"
+                   ref="batchAssetFacade"/>
+                   
+    <bean id="borrowerInfoFacade" class="com.zb.fincore.ams.facade.impl.BorrowerInfoFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.BorrowerInfoFacade"
+                   ref="borrowerInfoFacade"/>
+
+    <bean id="assetForP2PFacade" class="com.zb.fincore.ams.facade.impl.AssetForP2PFacadeImpl"/>
+    <dubbo:service interface="com.zb.fincore.ams.facade.AssetForP2PFacade"
+                   ref="assetForP2PFacade"/>
+</beans>

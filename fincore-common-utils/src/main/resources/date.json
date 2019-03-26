@@ -1,0 +1,607 @@
+[
+  {
+    "date": "2017-09-01",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-02",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-09-03",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-09-04",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-05",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-06",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-07",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-08",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-09",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-09-10",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-09-11",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-12",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-13",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-14",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-15",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-16",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-09-17",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-09-18",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-19",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-20",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-21",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-22",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-23",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-09-24",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-09-25",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-26",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-27",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-28",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-29",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-09-30",
+    "workDay": "1",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-01",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-02",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-03",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-04",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-05",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-06",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-07",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-08",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-09",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-10",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-11",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-12",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-13",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-14",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-15",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-16",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-17",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-18",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-19",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-20",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-21",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-22",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-23",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-24",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-25",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-26",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-27",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-10-28",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-29",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-10-30",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-01",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-02",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-03",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-04",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-11-05",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-11-06",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-07",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-08",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-09",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-10",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-11",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-11-12",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-11-13",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-14",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-15",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-16",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-17",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-18",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-11-19",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-11-20",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-21",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-22",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-23",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-24",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-25",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-11-26",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-11-27",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-28",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-29",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-11-30",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-01",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-02",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-03",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-04",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-05",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-06",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-07",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-08",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-09",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-10",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-11",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-12",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-13",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-14",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-15",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-16",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-17",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-18",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-19",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-20",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-21",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-22",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-23",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-24",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-25",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-26",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-27",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-28",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-29",
+    "workDay": "1",
+    "tradeDay": "1"
+  },
+  {
+    "date": "2017-12-30",
+    "workDay": "0",
+    "tradeDay": "0"
+  },
+  {
+    "date": "2017-12-31",
+    "workDay": "0",
+    "tradeDay": "0"
+  }
+]

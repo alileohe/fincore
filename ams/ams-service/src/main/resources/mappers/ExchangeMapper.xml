@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.ExchangeDao">
+    <resultMap id="BaseResultMap" type="com.zb.fincore.ams.service.dal.model.Exchange">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="exchange_code" property="exchangeCode" jdbcType="VARCHAR"/>
+        <result column="exchange_name" property="exchangeName" jdbcType="VARCHAR"/>
+        <result column="cert_type" property="certType" jdbcType="TINYINT"/>
+        <result column="cert_no" property="certNo" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="registered_capital" property="registeredCapital" jdbcType="DECIMAL"/>
+        <result column="introduction" property="introduction" jdbcType="LONGVARCHAR"/>
+        <result column="exchange_rate" property="exchangeRate" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, exchange_code, exchange_name, cert_type, cert_no, province, registered_capital,introduction,exchange_rate,
+        create_time, create_by, modify_time, modify_by
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_exchange
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ams_exchange
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zb.fincore.ams.service.dal.model.Exchange"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ams_exchange (exchange_code, exchange_name,
+        cert_type, cert_no, province,
+        registered_capital, introduction,exchange_rate, create_by, modify_by
+        )
+        values (#{exchangeCode,jdbcType=VARCHAR}, #{exchangeName,jdbcType=VARCHAR},
+        #{certType,jdbcType=TINYINT}, #{certNo,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
+        #{registeredCapital,jdbcType=DECIMAL},#{introduction,jdbcType=LONGVARCHAR},#{exchangeRate,jdbcType=DECIMAL},
+        #{createBy,jdbcType=VARCHAR},#{modifyBy,jdbcType=VARCHAR},
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.zb.fincore.ams.service.dal.model.Exchange"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ams_exchange
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchangeCode != null">
+                exchange_code,
+            </if>
+            <if test="exchangeName != null">
+                exchange_name,
+            </if>
+            <if test="certType != null">
+                cert_type,
+            </if>
+            <if test="certNo != null">
+                cert_no,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="registeredCapital != null">
+                registered_capital,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+            <if test="exchangeRate != null">
+                exchange_rate,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="modifyBy != null">
+                modify_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="exchangeCode != null">
+                #{exchangeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="exchangeName != null">
+                #{exchangeName,jdbcType=VARCHAR},
+            </if>
+            <if test="certType != null">
+                #{certType,jdbcType=TINYINT},
+            </if>
+            <if test="certNo != null">
+                #{certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredCapital != null">
+                #{registeredCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=DECIMAL},
+            </if>
+            <if test="exchangeRate != null">
+                #{exchangeRate,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyBy != null">
+                #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zb.fincore.ams.service.dal.model.Exchange">
+        update ams_exchange
+        <set>
+            <if test="exchangeCode != null">
+                exchange_code = #{exchangeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="exchangeName != null">
+                exchange_name = #{exchangeName,jdbcType=VARCHAR},
+            </if>
+            <if test="certType != null">
+                cert_type = #{certType,jdbcType=TINYINT},
+            </if>
+            <if test="certNo != null">
+                cert_no = #{certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredCapital != null">
+                registered_capital = #{registeredCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="exchangeRate != null">
+                exchange_rate = #{exchangeRate,jdbcType=DECIMAL},
+            </if>
+            <if test="modifyBy != null">
+                modify_by = #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.zb.fincore.ams.service.dal.model.Exchange">
+        update ams_exchange
+        set exchange_code = #{exchangeCode,jdbcType=VARCHAR},
+        exchange_name = #{exchangeName,jdbcType=VARCHAR},
+        cert_type = #{certType,jdbcType=TINYINT},
+        cert_no = #{certNo,jdbcType=VARCHAR},
+        province = #{province,jdbcType=VARCHAR},
+        registered_capital = #{registeredCapital,jdbcType=DECIMAL},
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+        exchange_rate = #{exchangeRate,jdbcType=DECIMAL},
+        modify_by = #{modifyBy,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_exchange
+        where exchange_code = #{code,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Log4j 2.x 配置文件。每30秒自动检查和应用配置文件的更新； -->
+<Configuration status="warn" monitorInterval="30" strict="true" schema="Log4J-V2.2.xsd">
+    <properties>
+        <property name="log.path">/var/logs/ams</property>
+        <property name="log.pattern">%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n</property>
+    </properties>
+
+    <Appenders>
+        <!-- 输出到控制台 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- 需要记录的级别 -->
+            <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="${log.pattern}"/>
+        </Console>
+
+        <!--Cat-->
+        <!--<CatAppender name="CatAppender"/>-->
+        <!-- 输出到文件，按天或者超过80MB分割 -->
+        <RollingFile name="RocketmqClientAppender" fileName="${log.path}/ons.log"
+                     filePattern="${log.path}/ons-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- 输出到文件，按天或者超过80MB分割 -->
+        <RollingFile name="AmsAllRollingFile" fileName="${log.path}/ams.log"
+                     filePattern="${log.path}/ams-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- 输出到文件，按天或者超过80MB分割 -->
+        <RollingFile name="AmsErrorRollingFile" fileName="${log.path}/ams-error.log"
+                     filePattern="${log.path}/ams-error-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- 输出到文件，按天或者超过80MB分割 -->
+        <RollingFile name="AmsSQLRollingFile" fileName="${log.path}/ams-sql.log"
+                     filePattern="${log.path}/ams-sql-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- 输出到文件，按天或者超过80MB分割 -->
+        <RollingFile name="AmsSpringRollingFile" fileName="${log.path}/ams-spring.log"
+                     filePattern="${log.path}/ams-spring-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <!-- <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" /> -->
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.zb" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <!--Cat-->
+            <!--<AppenderRef ref="CatAppender"/>-->
+            <AppenderRef ref="AmsAllRollingFile"/>
+            <AppenderRef ref="AmsErrorRollingFile"/>
+        </Logger>
+        <Logger name="com.zb.fincore.ams.service.dal.dao" level="debug" additivity="true">
+            <AppenderRef ref="AmsSQLRollingFile"/>
+        </Logger>
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AmsSpringRollingFile"/>
+            <AppenderRef ref="AmsErrorRollingFile"/>
+        </Logger>
+
+        <logger name="RocketmqClient" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RocketmqClientAppender"/>
+        </logger>
+
+        <logger name="RocketmqCommon" level="debug" additivity="false">
+            <!--<level value="DEBUG" />-->
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RocketmqClientAppender"/>
+        </logger>
+
+        <logger name="RocketmqRemoting" level="debug" additivity="false">
+            <!--<level value="DEBUG" />-->
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RocketmqClientAppender"/>
+        </logger>
+
+        <logger name="com.aliyun" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RocketmqClientAppender"/>
+        </logger>
+
+        <logger name="com.alibaba" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RocketmqClientAppender"/>
+        </logger>
+    </Loggers>
+
+    <root level="INFO">
+        <appender-ref ref="Console"/>
+        <!--Cat-->
+        <!--<AppenderRef ref="CatAppender"/>-->
+        <appender-ref ref="AmsAllRollingFile"/>
+    </root>
+</Configuration>

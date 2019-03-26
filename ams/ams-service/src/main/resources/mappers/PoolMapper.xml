@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.PoolDao">
+    <resultMap id="BaseResultMap" type="com.zb.fincore.ams.service.dal.model.Pool">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="pool_code" property="poolCode" jdbcType="VARCHAR"/>
+        <result column="pool_name" property="poolName" jdbcType="VARCHAR"/>
+        <result column="pool_type" property="poolType" jdbcType="TINYINT"/>
+        <result column="limit_amount" property="limitAmount" jdbcType="DECIMAL"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="stock_amount" property="stockAmount" jdbcType="DECIMAL"/>
+        <result column="frozen_amount" property="frozenAmount" jdbcType="DECIMAL"/>
+        <result column="sale_amount" property="saleAmount" jdbcType="DECIMAL"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="load_switch_status" property="loadSwitchStatus" jdbcType="TINYINT"/>
+        <result column="finance_subject_id" property="financeSubjectId" jdbcType="BIGINT"/>
+        <result column="finance_subject_code" property="financeSubjectCode" jdbcType="VARCHAR"/>
+        <result column="trustee_id" property="trusteeId" jdbcType="BIGINT"/>
+        <result column="trustee_code" property="trusteeCode" jdbcType="VARCHAR"/>
+        <result column="pool_desc" property="poolDesc" jdbcType="LONGVARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="PoolDetailResultMap" type="com.zb.fincore.ams.service.dal.model.Pool">
+        <id column="pool_id" property="id" jdbcType="BIGINT"/>
+        <result column="pool_code" property="poolCode" jdbcType="VARCHAR"/>
+        <result column="pool_name" property="poolName" jdbcType="VARCHAR"/>
+        <result column="pool_type" property="poolType" jdbcType="TINYINT"/>
+        <result column="limit_amount" property="limitAmount" jdbcType="DECIMAL"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="stock_amount" property="stockAmount" jdbcType="DECIMAL"/>
+        <result column="frozen_amount" property="frozenAmount" jdbcType="DECIMAL"/>
+        <result column="sale_amount" property="saleAmount" jdbcType="DECIMAL"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="load_switch_status" property="loadSwitchStatus" jdbcType="TINYINT"/>
+        <result column="finance_subject_id" property="financeSubjectId" jdbcType="BIGINT"/>
+        <result column="finance_subject_code" property="financeSubjectCode" jdbcType="VARCHAR"/>
+        <result column="trustee_subject_id" property="trusteeId" jdbcType="BIGINT"/>
+        <result column="trustee_subject_code" property="trusteeCode" jdbcType="VARCHAR"/>
+        <result column="pool_desc" property="poolDesc" jdbcType="LONGVARCHAR"/>
+        <result column="asset_count" property="assetCount" jdbcType="INTEGER"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+        <association property="financeSubject" javaType="com.zb.fincore.ams.service.dal.model.FinanceSubject">
+            <id column="subject_id" property="id" jdbcType="BIGINT"/>
+            <result column="subject_code" property="subjectCode" jdbcType="VARCHAR"/>
+            <result column="subject_name" property="subjectName" jdbcType="VARCHAR"/>
+            <result column="subject_show_name" property="subjectShowName" jdbcType="VARCHAR" />
+            <result column="subject_cert_type" property="certType" jdbcType="TINYINT"/>
+            <result column="subject_cert_no" property="certNo" jdbcType="VARCHAR"/>
+            <result column="subject_cert_no_show_name" property="certNoShowName" jdbcType="VARCHAR" />
+            <result column="subject_registered_capital" property="registeredCapital" jdbcType="DECIMAL"/>
+            <result column="subject_subject_address" property="subjectAddress" jdbcType="VARCHAR"/>
+            <result column="subject_subject_address_show_name" property="subjectAddressShowName" jdbcType="VARCHAR"/>
+            <result column="subject_legal_person_name" property="legalPersonName" jdbcType="VARCHAR"/>
+            <result column="subject_legal_person_cert_no" property="legalPersonCertNo" jdbcType="VARCHAR"/>
+            <result column="subject_tel" property="tel" jdbcType="VARCHAR" />
+            <result column="subject_email" property="email" jdbcType="VARCHAR" />
+            <result column="subject_business_scope" property="businessScope" jdbcType="LONGVARCHAR"/>
+            <result column="subject_introduction" property="introduction" jdbcType="LONGVARCHAR"/>
+            <result column="subject_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="subject_create_by" property="createBy" jdbcType="VARCHAR"/>
+            <result column="subject_modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+            <result column="subject_modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+        </association>
+        <association property="trustee" javaType="com.zb.fincore.ams.service.dal.model.Trustee">
+            <id column="trustee_id" property="id" jdbcType="BIGINT"/>
+            <result column="trustee_code" property="trusteeCode" jdbcType="VARCHAR"/>
+            <result column="trustee_name" property="trusteeName" jdbcType="VARCHAR"/>
+            <result column="trustee_show_name" property="trusteeShowName" jdbcType="VARCHAR"/>
+            <result column="trustee_cert_type" property="certType" jdbcType="TINYINT"/>
+            <result column="trustee_cert_no" property="certNo" jdbcType="VARCHAR"/>
+            <result column="trustee_registered_capital" property="registeredCapital" jdbcType="DECIMAL"/>
+            <result column="trustee_trustee_address" property="trusteeAddress" jdbcType="VARCHAR"/>
+            <result column="trustee_trustee_address_show_name" property="trusteeAddressShowName" jdbcType="VARCHAR"/>
+            <result column="trustee_legal_person_name" property="legalPersonName" jdbcType="VARCHAR"/>
+            <result column="trustee_legal_person_cert_no" property="legalPersonCertNo" jdbcType="VARCHAR"/>
+            <result column="trustee_business_scope" property="businessScope" jdbcType="LONGVARCHAR"/>
+            <result column="trustee_introduction" property="introduction" jdbcType="LONGVARCHAR"/>
+            <result column="trustee_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="trustee_create_by" property="createBy" jdbcType="VARCHAR"/>
+            <result column="trustee_modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+            <result column="trustee_modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, pool_code, pool_name, pool_type, limit_amount, total_amount, stock_amount, frozen_amount, sale_amount,
+        status, load_switch_status, finance_subject_id, finance_subject_code, trustee_id,
+        trustee_code, pool_desc, version, create_time, create_by, modify_time, modify_by
+    </sql>
+
+    <sql id="Pool_Detail_List">
+        pool.id as pool_id, pool.pool_code, pool.pool_name, pool.pool_type, pool.limit_amount, pool.total_amount,
+        pool.stock_amount, pool.frozen_amount, pool.sale_amount,pool.status, pool.load_switch_status,
+        pool.finance_subject_id, pool.finance_subject_code, pool.trustee_id as trustee_subject_id,
+        pool.trustee_code as trustee_subject_code, pool.pool_desc, pool.version, pool.create_time, pool.create_by,
+        pool.modify_time, pool.modify_by,
+        subject.id subject_id, subject.subject_code,
+        subject.subject_name,subject.subject_show_name, subject.cert_type subject_cert_type, subject.cert_no subject_cert_no,
+        subject.cert_no_show_name as subject_cert_no_show_name,
+        subject.registered_capital as subject_registered_capital,subject.subject_address as subject_subject_address,
+        subject.subject_address_show_name as subject_subject_address_show_name,
+        subject.legal_person_name subject_legal_person_name, subject.legal_person_cert_no subject_legal_person_cert_no,
+        subject.tel as subject_tel,subject.email as subject_email,
+        subject.business_scope subject_business_scope, subject.introduction subject_introduction, subject.status subject_status,
+        subject.create_time subject_create_time, subject.create_by subject_create_by, subject.modify_time subject_modify_time,
+        subject.modify_by subject_modify_by,
+        trustee.id trustee_id, trustee.trustee_code,
+        trustee.trustee_name, trustee.trustee_show_name,trustee.cert_type trustee_cert_type, trustee.cert_no trustee_cert_no,
+        trustee.registered_capital as trustee_registered_capital,trustee.trustee_address as trustee_trustee_address,
+        trustee.trustee_address_show_name as trustee_trustee_address_show_name,
+        trustee.legal_person_name trustee_legal_person_name, trustee.legal_person_cert_no trustee_legal_person_cert_no,
+        trustee.business_scope trustee_business_scope, trustee.introduction trustee_introduction, trustee.status trustee_status,
+        trustee.create_time trustee_create_time, trustee.create_by trustee_create_by, trustee.modify_time trustee_modify_time,
+        trustee.modify_by trustee_modify_by
+    </sql>
+
+    <sql id="filterSql">
+        <where>
+            <if test="id != null">
+                and pool.id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="poolCode != null and poolCode != ''">
+                and pool.pool_code = #{poolCode,jdbcType=VARCHAR}
+            </if>
+            <if test="poolName != null and poolName != ''">
+                and pool.pool_name LIKE concat(concat('%', #{poolName,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="poolType != null">
+                and pool.pool_type = #{poolType,jdbcType=TINYINT}
+            </if>
+            <if test="status != null">
+                and pool.status = #{status,jdbcType=TINYINT}
+            </if>
+            <if test="loadSwitchStatus != null">
+                and pool.load_switch_status = #{loadSwitchStatus,jdbcType=TINYINT}
+            </if>
+            <if test="financeSubjectId != null">
+                and pool.finance_subject_id = #{financeSubjectId,jdbcType=BIGINT}
+            </if>
+            <if test="financeSubjectCode != null and financeSubjectCode != ''">
+                and pool.finance_subject_code = #{financeSubjectCode,jdbcType=VARCHAR}
+            </if>
+            <if test="trusteeId != null">
+                and pool.trustee_id = #{trusteeId,jdbcType=BIGINT}
+            </if>
+            <if test="trusteeCode != null and trusteeCode != ''">
+                and pool.trustee_code = #{trusteeCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_pool
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectPoolDetailList" resultMap="PoolDetailResultMap" parameterType="com.zb.fincore.ams.service.dal.model.Pool">
+        select
+        <include refid="Pool_Detail_List"/>,(SELECT count(1) from ams_asset_pool_relation relation
+          where relation.pool_code = pool.pool_code) as asset_count
+        from ams_pool pool left join ams_finance_subject subject on subject.subject_code = pool.finance_subject_code
+        left join ams_trustee trustee on trustee.trustee_code = pool.trustee_code
+        <include refid="filterSql"/>
+        ORDER BY pool.create_time desc
+    </select>
+
+    <select id="selectDetailByCode" resultMap="PoolDetailResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Pool_Detail_List"/>
+        from ams_pool pool left join ams_finance_subject subject on subject.subject_code = pool.finance_subject_code
+        left join ams_trustee trustee on trustee.trustee_code = pool.trustee_code
+        where pool.pool_code = #{poolCode,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_pool
+        where pool_code = #{poolCode,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer"
+            parameterType="com.zb.fincore.ams.service.dal.model.Pool">
+        select
+        COUNT(1)
+        from ams_pool pool
+        <include refid="filterSql"/>
+    </select>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="com.zb.fincore.ams.service.dal.model.Pool">
+        select
+        <include refid="Base_Column_List"/>
+        from ams_pool pool
+        <include refid="filterSql"/>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ams_pool
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.zb.fincore.ams.service.dal.model.Pool"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ams_pool (pool_code, pool_name,
+        pool_type, limit_amount, total_amount, stock_amount,
+        frozen_amount, sale_amount, status,
+        load_switch_status, finance_subject_id, finance_subject_code,
+        trustee_id, trustee_code, pool_desc, create_time,
+        create_by, modify_time, modify_by
+        )
+        values (#{poolCode,jdbcType=VARCHAR}, #{poolName,jdbcType=VARCHAR},
+        #{poolType,jdbcType=TINYINT}, #{limitAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL},
+        #{stockAmount,jdbcType=DECIMAL},
+        #{frozenAmount,jdbcType=DECIMAL}, #{saleAmount,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT},
+        #{loadSwitchStatus,jdbcType=TINYINT}, #{financeSubjectId,jdbcType=BIGINT},
+        #{financeSubjectCode,jdbcType=VARCHAR}, #{trusteeId,jdbcType=BIGINT}, #{trusteeCode,jdbcType=VARCHAR},
+        #{poolDesc,jdbcType=LONGVARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.zb.fincore.ams.service.dal.model.Pool"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ams_pool
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="poolCode != null">
+                pool_code,
+            </if>
+            <if test="poolName != null">
+                pool_name,
+            </if>
+            <if test="poolType != null">
+                pool_type,
+            </if>
+            <if test="limitAmount != null">
+                limit_amount,
+            </if>
+            <if test="totalAmount != null">
+                total_amount,
+            </if>
+            <if test="stockAmount != null">
+                stock_amount,
+            </if>
+            <if test="frozenAmount != null">
+                frozen_amount,
+            </if>
+            <if test="saleAmount != null">
+                sale_amount,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="loadSwitchStatus != null">
+                load_switch_status,
+            </if>
+            <if test="financeSubjectId != null">
+                finance_subject_id,
+            </if>
+            <if test="financeSubjectCode != null">
+                finance_subject_code,
+            </if>
+            <if test="trusteeId != null">
+                trustee_id,
+            </if>
+            <if test="trusteeCode != null">
+                trustee_code,
+            </if>
+            <if test="poolDesc != null">
+                pool_desc,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="modifyBy != null">
+                modify_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="poolCode != null">
+                #{poolCode,jdbcType=VARCHAR},
+            </if>
+            <if test="poolName != null">
+                #{poolName,jdbcType=VARCHAR},
+            </if>
+            <if test="poolType != null">
+                #{poolType,jdbcType=TINYINT},
+            </if>
+            <if test="limitAmount != null">
+                #{limitAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="stockAmount != null">
+                #{stockAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="frozenAmount != null">
+                #{frozenAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="saleAmount != null">
+                #{saleAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="loadSwitchStatus != null">
+                #{loadSwitchStatus,jdbcType=TINYINT},
+            </if>
+            <if test="financeSubjectId != null">
+                #{financeSubjectId,jdbcType=BIGINT},
+            </if>
+            <if test="financeSubjectCode != null">
+                #{financeSubjectCode,jdbcType=VARCHAR},
+            </if>
+            <if test="trusteeId != null">
+                #{trusteeId,jdbcType=BIGINT},
+            </if>
+            <if test="trusteeCode != null">
+                #{trusteeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="poolDesc != null">
+                #{poolDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                #{modifyBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateSelectiveWithLock" parameterType="com.zb.fincore.ams.service.dal.model.Pool">
+        update ams_pool
+        <set>
+            <if test="poolCode != null">
+                pool_code = #{poolCode,jdbcType=VARCHAR},
+            </if>
+            <if test="poolName != null">
+                pool_name = #{poolName,jdbcType=VARCHAR},
+            </if>
+            <if test="poolType != null">
+                pool_type = #{poolType,jdbcType=TINYINT},
+            </if>
+            <if test="limitAmount != null">
+                limit_amount = #{limitAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="stockAmount != null">
+                stock_amount = #{stockAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="frozenAmount != null">
+                frozen_amount = #{frozenAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="saleAmount != null">
+                sale_amount = #{saleAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="loadSwitchStatus != null">
+                load_switch_status = #{loadSwitchStatus,jdbcType=TINYINT},
+            </if>
+            <if test="financeSubjectId != null">
+                finance_subject_id = #{financeSubjectId,jdbcType=BIGINT},
+            </if>
+            <if test="financeSubjectCode != null">
+                finance_subject_code = #{financeSubjectCode,jdbcType=VARCHAR},
+            </if>
+            <if test="trusteeId != null">
+                trustee_id = #{trusteeId,jdbcType=BIGINT},
+            </if>
+            <if test="trusteeCode != null">
+                trustee_code = #{trusteeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="poolDesc != null">
+                pool_desc = #{poolDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="modifyBy != null">
+                modify_by = #{modifyBy,jdbcType=VARCHAR},
+            </if>
+            version = version + 1
+        </set>
+        where id = #{id,jdbcType=BIGINT} and version = #{version,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zb.fincore.ams.service.dal.model.Pool">
+        update ams_pool
+        set pool_code = #{poolCode,jdbcType=VARCHAR},
+        pool_name = #{poolName,jdbcType=VARCHAR},
+        pool_type = #{poolType,jdbcType=TINYINT},
+        limit_amount = #{limitAmount,jdbcType=DECIMAL},
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+        stock_amount = #{stockAmount,jdbcType=DECIMAL},
+        frozen_amount = #{frozenAmount,jdbcType=DECIMAL},
+        sale_amount = #{saleAmount,jdbcType=DECIMAL},
+        status = #{status,jdbcType=TINYINT},
+        load_switch_status = #{loadSwitchStatus,jdbcType=TINYINT},
+        finance_subject_id = #{financeSubjectId,jdbcType=BIGINT},
+        finance_subject_code = #{financeSubjectCode,jdbcType=VARCHAR},
+        trustee_id = #{trusteeId,jdbcType=BIGINT},
+        trustee_code = #{trusteeCode,jdbcType=VARCHAR},
+        pool_desc = #{poolDesc,jdbcType=LONGVARCHAR},
+        modify_by = #{modifyBy,jdbcType=VARCHAR},
+        version = version + 1
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!--校验资产池名称是否重复-->
+    <select id="selectPoolCountByName" resultType="java.lang.Integer"
+            parameterType="java.lang.String">
+        select COUNT(1)
+        from ams_pool
+        where pool_name = #{poolName,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="queryLeftAsset">
+        <if test="poolCode != null and poolCode != ''">
+            and pool.pool_code = #{poolCode,jdbcType=VARCHAR}
+        </if>
+        <if test="poolType != null">
+            and pool.pool_type = #{poolType,jdbcType=TINYINT}
+        </if>
+    </sql>
+
+    <!--查询资产池剩余资产数量-->
+    <select id="queryLeftAssetAmountListCount" parameterType="java.util.Map"
+            resultType="java.lang.Integer">
+           SELECT count(1) from(SELECT
+            DATEDIFF(asset.value_end_time, now()) + 1 AS left_days,
+            pool.pool_code
+            FROM ams_pool pool
+            INNER JOIN ams_asset_pool_relation relation on relation.pool_code = pool.pool_code
+            INNER JOIN ams_asset asset on asset.asset_code = relation.asset_code
+            WHERE pool.stock_amount > 0
+            AND DATE_FORMAT(asset.value_end_time,'%Y-%m-%d') &gt;= DATE_FORMAT(now(),'%Y-%m-%d')
+            <include refid="queryLeftAsset"/>
+            group by left_days,pool_code) t
+    </select>
+
+    <!--查询资产池剩余资产-->
+    <select id="queryLeftAssetAmountList" parameterType="java.util.Map"
+            resultType="com.zb.fincore.ams.facade.model.PoolLeftAssetModel">
+        SELECT
+            DATEDIFF(asset.value_end_time, now()) + 1 AS left_days,
+            asset.asset_name,
+            asset.establish_time,
+            asset.value_start_time,
+            asset.value_end_time,
+            asset.expire_time,
+            asset.value_days,
+            pool.pool_code,
+            pool.pool_name,
+            pool.pool_type,
+            sum(asset.asset_amount) total_amount,
+            sum(asset.asset_amount - asset.frozen_amount - asset.sale_amount) left_amount,
+            COUNT(asset.asset_code) as asset_count
+        FROM ams_pool pool
+            INNER JOIN ams_asset_pool_relation relation on relation.pool_code = pool.pool_code
+            INNER JOIN ams_asset asset on asset.asset_code = relation.asset_code
+        WHERE pool.stock_amount > 0
+        AND DATE_FORMAT(asset.value_end_time,'%Y-%m-%d') &gt;= DATE_FORMAT(now(),'%Y-%m-%d')
+        <include refid="queryLeftAsset"/>
+        group by left_days,pool_code
+        order by asset.value_end_time asc
+    </select>
+</mapper>

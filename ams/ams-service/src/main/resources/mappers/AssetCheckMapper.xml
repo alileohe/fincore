@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.fincore.ams.service.dal.dao.AssetCheckDao">
+    <resultMap id="InProcessAssetResult" type="com.zb.fincore.ams.facade.model.InProcessAssetModel">
+        <result column="dayLeft" property="dayLeft" jdbcType="VARCHAR"/>
+        <result column="expireDay" property="expireDay" jdbcType="VARCHAR"/>
+        <result column="stockAmount" property="stockAmount" jdbcType="DECIMAL"/>
+        <result column="assetCount" property="assetCount" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="NotInProcessAssetResult" type="com.zb.fincore.ams.facade.model.NotInProcessAssetModel">
+        <result column="valueStartTime" property="valueStartTime" jdbcType="VARCHAR"/>
+        <result column="valueDays" property="valueDays" jdbcType="INTEGER"/>
+        <result column="expireDate" property="expireDate" jdbcType="VARCHAR"/>
+        <result column="assetAmount" property="assetAmount" jdbcType="DECIMAL"/>
+        <result column="assetCount" property="assetCount" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="AssetTransactionResult" type="com.zb.fincore.ams.facade.model.AssetTransactionModel">
+        <result column="registerName" property="registerName" jdbcType="VARCHAR"/>
+        <result column="listedInstName" property="listedInstName" jdbcType="VARCHAR"/>
+        <result column="exchangeName" property="exchangeName" jdbcType="VARCHAR"/>
+        <result column="delistedInstName" property="delistedInstName" jdbcType="VARCHAR"/>
+        <result column="saleAmount" property="saleAmount" jdbcType="DECIMAL"/>
+        <result column="saleDate" property="saleDate" jdbcType="VARCHAR"/>
+        <result column="paybackAmount" property="paybackAmount" jdbcType="DECIMAL"/>
+        <result column="paybackDate" property="paybackDate" jdbcType="VARCHAR"/>
+        <result column="saleDurationDays" property="saleDurationDays" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectInProcessAsset" resultMap="InProcessAssetResult">
+		SELECT
+		CASE 
+		WHEN DATEDIFF(c.product_value_end_time, now())+1&lt;= 365 
+		THEN CONCAT(DATEDIFF(c.product_value_end_time, now())+1,'天')
+		WHEN DATEDIFF(c.product_value_end_time, now())+1 > 365 
+		THEN '大于365天'
+		END AS dayLeft,	
+		
+		CASE 
+		WHEN DATEDIFF(c.product_value_end_time, now())+1 &lt;= 365 
+		THEN DATE_FORMAT(c.product_value_end_time, '%Y-%m-%d')
+		WHEN DATEDIFF(c.product_value_end_time, now())+1 > 365 THEN 'NAN'
+		END AS expireDay,
+		
+ 		sum(stock_amount) AS stockAmount,		
+ 		
+		count(a.id) AS assetCount
+		
+		FROM
+		ams_asset a
+		LEFT JOIN ams_asset_issue_relation b ON a.asset_code = b.asset_code
+		LEFT JOIN ams_issue_plan c ON b.issue_id = c.id
+		WHERE
+		c.product_value_end_time > now()
+		AND c.value_start_time &lt;= now()
+		AND approval_status = 3
+		AND storage_status = 1
+	    AND  a.stock_amount>0
+		GROUP BY
+		dayLeft
+		ORDER BY
+		expireDay;
+    </select>
+    <select id="selectNotInProcessAsset" resultMap="NotInProcessAssetResult" parameterType="com.zb.fincore.ams.facade.dto.req.QueryNotInProcessAssetRequest">
+		SELECT
+			DATE_FORMAT(c.value_start_time,'%Y-%m-%d') AS valueStartTime,
+			a.value_days as valueDays,
+			DATE_FORMAT(c.product_value_end_time, '%Y-%m-%d') AS expireDate,
+			
+		sum( a.asset_amount- ifnull( case 
+		           when d.register_status='REGISTERED' then d.register_amount
+				   when d.register_status!='REGISTERED' then 0
+				   when d.register_status is null then 0 End  ,0)
+		    ) AS assetAmount,			
+			count(a.id) AS assetCount	
+		FROM
+		ams_asset a
+		LEFT JOIN ams_asset_issue_relation b ON a.asset_code = b.asset_code
+		LEFT JOIN ams_issue_plan c ON b.issue_id = c.id	
+		LEFT JOIN ams_asset_exchange_register d ON a.asset_code = d.parent_asset_code
+		WHERE
+			c.product_value_end_time > now()
+		AND c.value_start_time BETWEEN date_add(DATE_FORMAT(now(), '%Y-%m-%d'),INTERVAL 1 DAY)
+		AND date_add(DATE_FORMAT(now(), '%Y-%m-%d'),INTERVAL 14 DAY)
+		AND DATE_FORMAT(c.value_start_time,'%Y-%m-%d') = #{date}
+		AND a.approval_status = 3
+		AND a.storage_status = 1
+		AND a.stock_amount>0
+		GROUP BY
+			valueStartTime,
+			valueDays,
+			expireDate;
+    </select>
+    <select id="selectAssetTransaction" resultMap="AssetTransactionResult">
+		SELECT
+			t1.register_name as registerName,
+			t2.subject_name AS listedInstName,
+			t1.exchange_name as exchangeName,
+			t1.delisted_inst_name as delistedInstName,
+			t1.asset_amount AS 'saleAmount',
+			DATE_FORMAT(
+				t1.product_value_start_time,
+				'%Y-%m-%d'
+			) AS 'saleDate',
+			t1.asset_amount * (1 + t1.register_rate / 365 * (
+				TO_DAYS(t1.product_value_end_time) - TO_DAYS(t1.product_value_start_time)
+			)) AS 'paybackAmount',
+			DATE_FORMAT(t1.product_value_end_time, '%Y-%m-%d') AS 'paybackDate',
+			DATEDIFF(
+				t1.product_value_end_time,
+				t1.product_value_start_time
+			)+1 AS 'saleDurationDays'
+		FROM
+			(
+				SELECT
+					b.register_value_start_time AS product_value_start_time,
+					b.register_value_end_time AS product_value_end_time,
+					a.asset_amount,
+					b.delisted_inst_code,
+					b.listed_inst_code,
+					b.register_name,
+					c.subject_name AS delisted_inst_name,
+					d.exchange_name,
+					b.register_rate
+				FROM
+					ams_asset a
+				INNER JOIN ams_asset_exchange_register b ON a.asset_code = b.asset_code
+				LEFT JOIN ams_finance_subject c ON b.delisted_inst_code = c.subject_code
+				LEFT JOIN ams_exchange d ON b.trade_inst_code = d.exchange_code
+				WHERE
+				a.approval_status = 3
+				AND a.storage_status = 1
+				AND a.register_type = 3
+				AND b.register_status = 'REGISTERED'
+				AND b.register_value_end_time > DATE_ADD(DATE_FORMAT(now(), '%Y-%m-%d'),INTERVAL -1 DAY)
+			) t1
+		LEFT JOIN ams_finance_subject t2 ON t1.listed_inst_code = t2.subject_code
+		order by t1.product_value_start_time desc;
+    </select>
+</mapper>

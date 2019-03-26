@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Application context definition. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/jdbc
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"
+       default-autowire="byName">
+    <context:annotation-config />
+
+
+    <!-- 资产成立JOB start -->
+    <bean id="assetEstablishedJob" class="com.zb.fincore.ams.web.controller.job.AssetEstablishedJob"></bean>
+    <bean id="assetEstablishedTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="assetEstablishedJob" />
+        <property name="targetMethod" value="doAssetEstablishedJob" />
+        <property name="concurrent" value="true" />
+    </bean>
+    <bean id="assetEstablishedTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="assetEstablishedTask" />
+        <property name="cronExpression" value="0 5/30 0-7 * * ?" />
+        <!--<property name="cronExpression" value="0 5/10 0-23 * * ?" />-->
+    </bean>
+    <!-- 资产成立JOB end -->
+
+
+    <!-- 资产到期JOB start -->
+    <bean id="assetExpiredJob" class="com.zb.fincore.ams.web.controller.job.AssetExpiredJob"></bean>
+    <bean id="assetExpiredTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="assetExpiredJob" />
+        <property name="targetMethod" value="doAssetExpiredJob" />
+        <property name="concurrent" value="true" />
+    </bean>
+    <bean id="assetExpiredTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="assetExpiredTask" />
+        <!--0点5分后 每30分钟执行一次-->
+        <property name="cronExpression" value="0 5/30 0-7 * * ?" />
+        <!--<property name="cronExpression" value="0 5/10 0-23 * * ?" />-->
+    </bean>
+    <!-- 资产到期JOB end -->
+
+
+    <bean id="quartzCronBean" lazy-init="false" autowire="no"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="assetEstablishedTrigger" />
+                <ref bean="assetExpiredTrigger" />
+            </list>
+        </property>
+    </bean>
+</beans>
